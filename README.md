@@ -1,2 +1,2 @@
-# docker-crowdsec-dashboard
+# docker-crowdsec-dashboard-mb
 Docker compose - Dashboard for crowdsec
