@@ -1,20 +1,27 @@
-# Utiliser l'image officielle de Metabase comme base
-FROM metabase/metabase:latest
+# Utiliser une image Debian comme base
+FROM debian:latest
 
-# Créer un répertoire pour les données de Metabase
-RUN mkdir -p /data
+# Mettre à jour les paquets et installer les dépendances nécessaires
+RUN apt-get update && apt-get install -y \
+    curl \
+    gnupg \
+    apt-transport-https
 
-# Copier le fichier de configuration et les dashboards préconfigurés
-COPY metabase.db /data/metabase.db
+# Ajouter la clé GPG de CrowdSec
+RUN curl -s https://packagecloud.io/install/repositories/crowdsec/crowdsec/script.deb.sh | bash
 
-# Définir les permissions appropriées
-RUN chown -R metabase:metabase /data
+# Installer le dashboard
+RUN apt-get install -y crowdsec-dashboard
 
-# Définir la variable d'environnement pour le fichier de base de données
-ENV MB_DB_FILE /data/metabase.db
+# Copier le script d'entrypoint
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-# Exposer le port 3000
+# Copier le fichier de secrets pour l'installation initiale
+COPY secrets /etc/crowdsec/secrets
+
+# Exposer le port du dashboard
 EXPOSE 3000
 
-# Définir le point d'entrée de l'application
-ENTRYPOINT ["java", "-jar", "/app/metabase.jar"]
+# Définir l'entrypoint
+ENTRYPOINT ["/entrypoint.sh"]
