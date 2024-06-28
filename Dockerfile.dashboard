@@ -1,5 +1,5 @@
 # Utiliser une image Debian comme base
-FROM crowdsecurity/crowdsec:v1.3.1
+FROM crowdsecurity/crowdsec:v1.6.2
 
 # Mettre à jour les paquets et installer les dépendances nécessaires
 RUN apt-get update && apt-get install -y \
