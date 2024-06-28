@@ -16,4 +16,4 @@ else
 fi
 
 # Démarrer le dashboard
-cscli dashboard start
+cscli dashboard setup
