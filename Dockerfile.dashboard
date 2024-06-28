@@ -6,8 +6,5 @@ FROM crowdsecurity/crowdsec:${CROWDSEC_VERSION}
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-# Copier le fichier de secrets pour l'installation initiale
-COPY secrets /etc/crowdsec/secrets
-
 # Définir l'entrypoint
 ENTRYPOINT ["/entrypoint.sh"]
