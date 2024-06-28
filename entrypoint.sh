@@ -9,6 +9,9 @@ if [ ! -f /etc/crowdsec/dashboard_installed ]; then
     --listen "${DASHBOARD_LISTEN:-127.0.0.1}" \
     --port "${DASHBOARD_PORT:-3000}"
 
+  # Arrêter le dashboard après le setup
+  cscli dashboard stop
+
   # Marquer le dashboard comme installé
   touch /etc/crowdsec/dashboard_installed
 else
