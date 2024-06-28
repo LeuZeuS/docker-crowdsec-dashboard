@@ -9,8 +9,5 @@ RUN chmod +x /entrypoint.sh
 # Copier le fichier de secrets pour l'installation initiale
 COPY secrets /etc/crowdsec/secrets
 
-# Exposer le port du dashboard
-EXPOSE 3000
-
 # Définir l'entrypoint
 ENTRYPOINT ["/entrypoint.sh"]
