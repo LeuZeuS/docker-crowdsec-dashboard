@@ -4,7 +4,7 @@
 if [ ! -f /etc/crowdsec/dashboard_installed ]; then
   echo "Dashboard non installé. Exécution de cscli dashboard setup."
 
-  # Exécuter le setup avec les variables d'environnement
+  # Exécuter le setup avec les variables d'environnement et le secret
   cscli dashboard setup --password "$(cat /etc/crowdsec/secrets/password)" \
     --listen "${DASHBOARD_LISTEN:-127.0.0.1}" \
     --port "${DASHBOARD_PORT:-3000}"
