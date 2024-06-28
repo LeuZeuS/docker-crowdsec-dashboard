@@ -1,18 +1,6 @@
 # Utiliser une image Debian comme base
 FROM crowdsecurity/crowdsec:v1.6.2
 
-# Mettre à jour les paquets et installer les dépendances nécessaires
-RUN apt-get update && apt-get install -y \
-    curl \
-    gnupg \
-    apt-transport-https
-
-# Ajouter la clé GPG de CrowdSec
-RUN curl -s https://packagecloud.io/install/repositories/crowdsec/crowdsec/script.deb.sh | bash
-
-# Installer le dashboard
-RUN apt-get install -y crowdsec-dashboard
-
 # Copier le script d'entrypoint
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
