@@ -1,5 +1,6 @@
-# Utiliser une image Debian comme base
-FROM crowdsecurity/crowdsec:v1.6.2
+# Utiliser un argument pour la version de CrowdSec
+ARG CROWDSEC_VERSION=v1.6.2
+FROM crowdsecurity/crowdsec:${CROWDSEC_VERSION}
 
 # Copier le script d'entrypoint
 COPY entrypoint.sh /entrypoint.sh
